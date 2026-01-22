@@ -1,0 +1,116 @@
+package com.example.ui_interface.inputs
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.ui_interface.R
+import com.example.ui_interface.theme.LocalTypography
+import com.example.ui_interface.theme.gray
+
+@Composable
+fun SearchField(
+    text: String,
+    onValueChanged: (String) -> Unit,
+    onSearch: () -> Unit,
+    onSearchIcon: () -> Unit,
+    //keyboardActions: KeyboardActions = KeyboardActions(onSearch = {}),
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .height(52.dp)
+            .clip(RoundedCornerShape(14.dp))
+            .background(Color.White)
+            .clickable(onClick = { onSearch() })
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 30.dp)
+                .fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Icon(
+                painter = painterResource(id = R.drawable.ic_search),
+                contentDescription = "search icon",
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .clickable(onClick = { onSearchIcon() })
+            )
+
+            if(text.isEmpty()) {
+                BasicTextField(
+                    value = text,
+                    onValueChange = onValueChanged,
+                    textStyle = LocalTypography.current.titleMedium,
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                    //keyboardActions = keyboardActions
+                )
+
+                Row(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End
+                ) {
+
+                    VerticalDivider(
+                        color = gray,
+                        modifier = Modifier
+                            .width(1.dp)
+                            .height(24.dp)
+                    )
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.micro),
+                        contentDescription = "micro icon",
+                        modifier = Modifier
+                            .scale(2.5f)
+                            .padding(start = 15.dp)
+                    )
+                }
+            }
+            else
+                Text(
+                    text = stringResource(R.string.search_placeholder),
+                    style = LocalTypography.current.titleMedium4
+                )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun SearchFieldPrev() {
+    SearchField(
+        text = "something",
+        onValueChanged = {},
+        onSearch = {},
+        onSearchIcon = {}
+    )
+}
