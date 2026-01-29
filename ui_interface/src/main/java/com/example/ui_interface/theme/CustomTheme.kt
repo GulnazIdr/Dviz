@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 
@@ -24,35 +25,35 @@ data class CustomTypography(
     val titleBold2: TextStyle = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.W700,
-        lineHeight = 0.2.em,
+        lineHeight = 1.25.em,
         letterSpacing = 0.em,
         color = black
     ),
     val headLineMedium: TextStyle = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.W400,
-        lineHeight = 0.24.em,
+        lineHeight = 1.5.em,
         letterSpacing = 0.em,
         color = gray
     ),
     val titleMedium: TextStyle = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.W500,
-        lineHeight = 0.20.em,
+        lineHeight = 1.25.em,
         letterSpacing = 0.em,
         color = black
     ),
     val titleMediumError: TextStyle = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.W500,
-        lineHeight = 0.20.em,
+        lineHeight = 1.25.em,
         letterSpacing = 0.em,
         color = red
     ),
     val titleMedium2: TextStyle = TextStyle(
         fontSize = 14.sp,
         fontWeight = FontWeight.W500,
-        lineHeight = 0.16.em,
+        lineHeight = 1.em,
         letterSpacing = 0.em,
         color = darkGray
     ),
@@ -66,21 +67,35 @@ data class CustomTypography(
     val titleMedium4: TextStyle = TextStyle(
         fontSize = 12.sp,
         fontWeight = FontWeight.W500,
-        lineHeight = 0.2.em,
+        lineHeight = 1.25.em,
         letterSpacing = 0.em,
         color = darkGray
+    ),
+    val titleMedium5: TextStyle = TextStyle(
+        fontSize = 7.sp,
+        fontWeight = FontWeight.W500,
+        lineHeight = 1.em,
+        letterSpacing = 0.em,
+        color = darkBlack
+    ),
+    val titleMedium6: TextStyle = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W500,
+        lineHeight = 1.4.em,
+        letterSpacing = 0.em,
+        color = black
     ),
     val headLineRegular: TextStyle = TextStyle(
         fontSize = 12.sp,
         fontWeight = FontWeight.W400,
-        lineHeight = 0.16.em,
+        lineHeight = 1.em,
         letterSpacing = 0.em,
         color = gray
     ),
     val headLineRegular2: TextStyle = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.W400,
-        lineHeight = 0.2.em,
+        lineHeight = 1.5.em,
         letterSpacing = 0.em,
         color = gray
     ),
@@ -94,7 +109,7 @@ data class CustomTypography(
     val captionSemibold: TextStyle = TextStyle(
         fontSize = 14.sp,
         fontWeight = FontWeight.W600,
-        lineHeight = 0.22.em,
+        lineHeight = 1.4.em,
         letterSpacing = 0.em,
         color = white
     ),
@@ -108,7 +123,7 @@ data class CustomTypography(
     val captionSemibold3: TextStyle = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.W600,
-        lineHeight = 0.2.em,
+        lineHeight = 1.25.em,
         letterSpacing = 0.em,
         color = black
     ),

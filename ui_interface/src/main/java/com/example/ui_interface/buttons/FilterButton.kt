@@ -1,6 +1,7 @@
 package com.example.ui_interface.buttons
 
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -11,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.ui_interface.theme.LocalTypography
 import com.example.ui_interface.theme.black
@@ -24,31 +26,32 @@ fun FilterButton(
     modifier: Modifier = Modifier
 ) {
     val initialButtonColor = ButtonDefaults.buttonColors().copy(
-        containerColor = white,
-        contentColor = black
+        containerColor = white
     )
 
     val buttonColor = ButtonDefaults.buttonColors().copy(
-        containerColor = white,
-        contentColor = black
+        containerColor = mainColor
     )
-    var currentButtonColor by remember { mutableStateOf(initialButtonColor) }
+
+    var isFocused by remember { mutableStateOf(false) }
 
     Button(
-        colors = ButtonDefaults.buttonColors().copy(
-            containerColor = mainColor,
-            contentColor = white
-        ),
+        colors = if(isFocused) buttonColor else initialButtonColor,
         onClick = {
-            currentButtonColor = buttonColor
+            isFocused = !isFocused
             onFilter()
         },
-        shape = RoundedCornerShape(13.dp),
-        modifier = modifier.height(50.dp),
+        shape = RoundedCornerShape(8.dp),
+        modifier = modifier.height(40.dp),
     ) {
         Text(
             text = text,
-            style = LocalTypography.current.captionSemibold
+            style = LocalTypography.current.captionSemibold.copy(
+                color =
+                    if (isFocused) white
+                    else black
+            )
         )
     }
+
 }

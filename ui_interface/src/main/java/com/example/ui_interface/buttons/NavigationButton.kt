@@ -2,6 +2,7 @@ package com.example.ui_interface.buttons
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -27,7 +28,7 @@ import com.example.ui_interface.theme.white
 fun NavigationButton(
     text: String,
     onAction: () -> Unit,
-    enabled: Boolean,
+    enabled: Boolean = true,
     isCartButton: Boolean = false,
     modifier: Modifier = Modifier
 ) {
@@ -38,7 +39,7 @@ fun NavigationButton(
         ),
         onClick = onAction,
         shape = RoundedCornerShape(13.dp),
-        modifier = modifier.height(50.dp),
+        modifier = modifier.fillMaxWidth().height(50.dp),
         enabled = enabled
     ) {
         Row(

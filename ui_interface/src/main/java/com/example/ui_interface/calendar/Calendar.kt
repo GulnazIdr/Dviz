@@ -1,0 +1,159 @@
+package com.example.ui_interface.calendar
+
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.ui_interface.models.CalendarUi
+import com.example.ui_interface.theme.white
+import java.time.YearMonth
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun Calendar(
+    yearMonth: YearMonth,
+    onPreviousMonthButtonClicked: (YearMonth) -> Unit,
+    onNextMonthButtonClicked: (YearMonth) -> Unit,
+    dates: List<CalendarUi.Date>,
+    onDateClickListener: (CalendarUi.Date) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier
+            .clip(RoundedCornerShape(4.5.dp))
+            .background(white)
+            .padding(13.dp)
+    ) {
+        Column {
+            CalendarHeader(
+                yearMonth = yearMonth,
+                onPreviousMonthButtonClicked = onPreviousMonthButtonClicked,
+                onNextMonthButtonClicked = onNextMonthButtonClicked
+            )
+
+            Spacer(modifier = Modifier.height(11.dp))
+
+            CalendarDays(
+                dates = dates,
+                onDateClickListener = onDateClickListener
+            )
+        }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Preview
+@Composable
+private fun CalendarPrev() {
+    Calendar(
+        YearMonth.now(),
+        onPreviousMonthButtonClicked = {},
+        onNextMonthButtonClicked = {},
+        dates = listOf(
+            CalendarUi.Date(
+                "1", false
+            ),
+            CalendarUi.Date(
+                "2", false
+            ),
+            CalendarUi.Date(
+                "3", true
+            ),
+            CalendarUi.Date(
+                "4", false
+            ),
+            CalendarUi.Date(
+                "5", false
+            ),
+            CalendarUi.Date(
+                "1", false
+            ),
+            CalendarUi.Date(
+                "2", false
+            ),
+            CalendarUi.Date(
+                "3", false
+            ),
+            CalendarUi.Date(
+                "4", false
+            ),
+            CalendarUi.Date(
+                "5", false
+            ),
+            CalendarUi.Date(
+                "1", false
+            ),
+            CalendarUi.Date(
+                "2", false
+            ),
+            CalendarUi.Date(
+                "3", false
+            ),
+            CalendarUi.Date(
+                "4", false
+            ),
+            CalendarUi.Date(
+                "5", false
+            ),
+            CalendarUi.Date(
+                "1", false
+            ),
+            CalendarUi.Date(
+                "2", false
+            ),
+            CalendarUi.Date(
+                "3", true
+            ),
+            CalendarUi.Date(
+                "4", false
+            ),
+            CalendarUi.Date(
+                "5", false
+            ),
+            CalendarUi.Date(
+                "1", false
+            ),
+            CalendarUi.Date(
+                "2", false
+            ),
+            CalendarUi.Date(
+                "3", false
+            ),
+            CalendarUi.Date(
+                "4", false
+            ),
+            CalendarUi.Date(
+                "5", false
+            ),
+            CalendarUi.Date(
+                "1", false
+            ),
+            CalendarUi.Date(
+                "2", false
+            ),
+            CalendarUi.Date(
+                "3", false
+            ),
+            CalendarUi.Date(
+                "4", false
+            ),
+            CalendarUi.Date(
+                "5", false
+            ),
+
+        ),
+        onDateClickListener = {}
+    )
+}

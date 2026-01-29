@@ -36,8 +36,7 @@ fun CategoryButton(
 
     Button(
         colors = ButtonDefaults.buttonColors().copy(
-            contentColor = if(isFocused) white else mainColor,
-            containerColor = if(isFocused) black else white
+            containerColor = if(isFocused) mainColor else white
         ),
         onClick = {
             onAction()
@@ -51,7 +50,9 @@ fun CategoryButton(
     ) {
         Text(
             text = text,
-            style = LocalTypography.current.captionSemibold
+            style = LocalTypography.current.captionSemibold.copy(
+                color = if(isFocused) white else black
+            )
         )
     }
 }

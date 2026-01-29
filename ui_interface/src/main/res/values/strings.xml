@@ -1,37 +1,68 @@
 <resources>
     <string name="app_name">Dviz</string>
+    <string name="app_name_rus">Движж</string>
     <string name="signin_text">Вход</string>
     <string name="signup_text">Регистрация</string>
     <string name="forgot_pass_text">Забыл пароль</string>
     <string name="otp_text">OTP проверка</string>
+    <string name="category_text">Категории</string>
+    <string name="search_text">Поиск</string>
+    <string name="reset_pswd_text">Сбросить пароль</string>
+    <string name="generate_pswd_text">Сгенерировать пароль</string>
 
     <string name="forgot_pass_descr">Введите свою учетную запись для сброса</string>
     <string name="check_email_descr">Мы отправили код восстановления пароля на
         вашу электронную почту.</string>
     <string name="otp_descr">Пожалуйста, проверьте свою электронную почту,
         чтобы увидеть код подтверждения</string>
+    <string name="resend_code_text">Отправить заново</string>
+    <string name="enter_new_pswd_text">Введите новый пароль</string>
+    <string name="copied_text">Скопирован</string>
 
     <string name="city_text">Город</string>
     <string name="price_text">Стоимость</string>
-
     <string name="send_text">Отправить</string>
+    <string name="back_to_main_text">Вернуться на главную</string>
     <string name="cart_text">В корзину</string>
     <string name="resend_otp_text">Отправить заново</string>
     <string name="restore_password_text">Востановить</string>
     <string name="login_text">Войти</string>
     <string name="register_text">Зарегистрироваться</string>
     <string name="privacy_policy_text">Даю согласие на обработку персональных данных</string>
+    <string name="create_user_text">Создать пользователя</string>
+    <string name="confirm_text">Подтвердить</string>
+    <string name="update_text">Обновить</string>
+    <string name="copy_text">Скопировать</string>
 
     <string name="check_email_text">Проверьте Ваш Email</string>
     <string name="otp_code_text">OTP Код</string>
+    <string name="contact_info_text">Контактная информация</string>
+    <string name="address_text">Адрес</string>
+    <string name="result_text">Итого</string>
+    <string name="sum_text">Сумма</string>
 
     <string name="email_placeholder">xyz@gmail.com</string>
     <string name="name_placeholder">xxxxxxx</string>
+    <string name="password_placeholder">•••••••</string>
     <string name="search_placeholder">Поиск</string>
+
+    <string name="all_text">Все</string>
+    <string name="success_text">Вы успешно оформили заказ</string>
 
     <string name="email_label">Email</string>
     <string name="name_label">Имя</string>
     <string name="password_label">Пароль</string>
+    <string name="phone_text">Телефон</string>
+
+    <plurals name="ticket_plural_summary">
+        <item quantity="one">%1$d билет: %2$d ₽</item>
+        <item quantity="two">%1$d билета: %2$d ₽</item>
+        <item quantity="few">%1$d билета: %2$d ₽</item>
+        <item quantity="many">%1$d билетов: %2$d ₽</item>
+        <item quantity="other">%1$d билетов: %2$d ₽</item>
+    </plurals>
+    <string name="place_row_text">%1$d ряд, %2$d место</string>
+    <string name="stage_text">Сцена</string>
 
     <string name="new_user_question">Вы впервые?</string>
     <string name="has_account_question">Есть аккаунт?</string>

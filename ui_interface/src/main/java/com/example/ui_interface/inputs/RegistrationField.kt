@@ -33,8 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.ui_interface.R
 import com.example.ui_interface.theme.LocalTypography
+import com.example.ui_interface.theme.darkGray
 import com.example.ui_interface.theme.lightYellow
-import com.example.ui_interface.theme.lightgray
 import com.example.ui_interface.theme.red
 
 @Composable
@@ -43,7 +43,6 @@ fun RegistrationField(
     onValueChanged: (value: String) -> Unit,
     label: String,
     placeholder: String,
-    isError: Boolean,
     errorMessage: String,
     isPasswordField: Boolean = false,
     modifier: Modifier = Modifier
@@ -51,7 +50,7 @@ fun RegistrationField(
     var passwordVisibiliy by remember { mutableStateOf(false) }
 
     val inputState by animateColorAsState(
-        targetValue = if(isError) red else lightYellow,
+        targetValue = if(errorMessage.isNotEmpty()) red else lightYellow,
         label = "input field error"
     )
 
@@ -82,7 +81,9 @@ fun RegistrationField(
                 if (textValue.isEmpty()) {
                     Text(
                         text = placeholder,
-                        style = LocalTypography.current.titleMedium2
+                        style = LocalTypography.current.titleMedium2.copy(
+                            color = darkGray
+                        )
                     )
                 }
 
@@ -116,7 +117,7 @@ fun RegistrationField(
             }
         }
 
-        if(isError)
+        if(errorMessage.isNotEmpty())
             Text(
                 text = errorMessage,
                 style = LocalTypography.current.titleMediumError,
@@ -135,7 +136,7 @@ private fun RegistrationFieldPreview() {
         onValueChanged = {},
         label = "Name",
         placeholder = stringResource(R.string.name_placeholder),
-        isError = false,
+
         errorMessage = "name shouldnt be empty",
         isPasswordField = true,
     )

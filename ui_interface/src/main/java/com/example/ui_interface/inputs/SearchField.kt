@@ -62,7 +62,7 @@ fun SearchField(
                     .clickable(onClick = { onSearchIcon() })
             )
 
-            if(text.isEmpty()) {
+            if(text.isNotEmpty()) {
                 BasicTextField(
                     value = text,
                     onValueChange = onValueChanged,

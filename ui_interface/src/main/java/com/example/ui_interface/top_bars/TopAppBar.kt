@@ -8,32 +8,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.ui_interface.R
 import com.example.ui_interface.buttons.CustomIconButton
 import com.example.ui_interface.theme.LocalTypography
+import com.example.ui_interface.theme.lighterGray
 import com.example.ui_interface.theme.lightgray
 
 @Composable
 fun TopAppBar(
-    onBack: () -> Unit,
+    onBack: () -> Unit = {},
     title: String = "",
     iconId: Int? = null,
     onRightIcon: () -> Unit = {},
+    isLogin: Boolean = false,
     isRegistrationScreen: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier.fillMaxWidth(),
     ) {
-        CustomIconButton(
-            iconId = R.drawable.arrow,
-            modifier = Modifier
-                .clickable(onClick = { onBack() })
-                .align(Alignment.TopStart),
-            backgroundColor = lightgray
-        )
+        if (!isLogin)
+            CustomIconButton(
+                iconId = R.drawable.arrow,
+                modifier = Modifier
+                    .clickable(onClick = { onBack() })
+                    .align(Alignment.TopStart),
+                backgroundColor = lighterGray,
+                size = 44.dp,
+                iconSize = 22.dp
+            )
 
-        if(isRegistrationScreen) {
+        if(!isRegistrationScreen) {
             Text(
                 text = title,
                 style = LocalTypography.current.captionSemibold3,

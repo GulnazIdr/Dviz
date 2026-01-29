@@ -24,17 +24,10 @@ fun DeleteSideButton(
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .padding(end = 20.dp)
-            .height(221.dp)
-            .width(52.dp)
-            .clip(RoundedCornerShape(8.dp))
-            .background(mainColor)
-    ) {
+    SideButton {
         IconButton(
             onClick = {onDelete()},
-            modifier = Modifier.align(Alignment.Center)
+         //   modifier = Modifier.align(Alignment.Center)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_trash),
