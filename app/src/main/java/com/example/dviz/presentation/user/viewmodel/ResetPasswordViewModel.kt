@@ -5,8 +5,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dviz.domain.AuthRepository
-import com.example.dviz.domain.GeneratePasswordUseCase
+import com.example.dviz.domain.user.AuthRepository
+import com.example.dviz.domain.user.GeneratePasswordUseCase
+import com.example.dviz.presentation.user.UiResultState
 import com.example.dviz.presentation.user.AuthResultMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,13 +22,13 @@ class ResetPasswordViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val mapper: AuthResultMapper,
 ) : ViewModel() {
-        private val _authUiResultState = MutableStateFlow<
-                AuthUiResultState>(AuthUiResultState.Initial)
-        val authUiResultState: StateFlow<AuthUiResultState> get() = _authUiResultState.asStateFlow()
+        private val _UiResultState = MutableStateFlow<
+                UiResultState>(UiResultState.Initial)
+        val uiResultState: StateFlow<UiResultState> get() = _UiResultState.asStateFlow()
 
         private val _sentOtpResult = MutableStateFlow<
-                AuthUiResultState>(AuthUiResultState.Initial)
-        val sentOtpResult: StateFlow<AuthUiResultState> get() = _sentOtpResult.asStateFlow()
+                UiResultState>(UiResultState.Initial)
+        val sentOtpResult: StateFlow<UiResultState> get() = _sentOtpResult.asStateFlow()
 
         private val _modalWindowState = mutableStateOf(false)
         var modalWindowState: State<Boolean> = _modalWindowState
@@ -55,14 +56,14 @@ class ResetPasswordViewModel @Inject constructor(
         }
 
         fun sendOtp(email: String) = viewModelScope.launch {
-            _sentOtpResult.value = AuthUiResultState.Loading("Sending..")
+            _sentOtpResult.value = UiResultState.Loading("Sending..")
             val result = authRepository.sendOtp(email)
             _sentOtpResult.value = result.map(mapper)
         }
 
         fun checkOtp(email: String, entered: String) = viewModelScope.launch {
             val result = authRepository.checkOtp(email,entered)
-            _authUiResultState.value = result.map(mapper)
+            _UiResultState.value = result.map(mapper)
         }
 
         fun showSuccessDialog(){
@@ -70,10 +71,10 @@ class ResetPasswordViewModel @Inject constructor(
         }
 
         fun generatePassword(password: String): String{
-            _authUiResultState.value = AuthUiResultState.Loading("Generating..")
+            _UiResultState.value = UiResultState.Loading("Generating..")
             if(password.isNotEmpty()) return generatePasswordUseCase(password)
             else{
-                _authUiResultState.value = AuthUiResultState.Loading("Type a text in the field" +
+                _UiResultState.value = UiResultState.Loading("Type a text in the field" +
                         " to generate the password")
                 return ""
             }

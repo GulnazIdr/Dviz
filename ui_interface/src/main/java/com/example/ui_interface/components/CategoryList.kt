@@ -5,10 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.ui_interface.R
 import com.example.ui_interface.buttons.CategoryButton
 import com.example.ui_interface.models.CategoryUi
 
@@ -16,12 +13,14 @@ import com.example.ui_interface.models.CategoryUi
 fun CategoryList(
     onCategory: (id: Int) -> Unit,
     listOfButtons: List<CategoryUi>,
+    isLoading: Boolean = false,
+    loading: @Composable () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
     ) {
-        if (listOfButtons.isNotEmpty()) {
+        if (!isLoading) {
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
@@ -32,20 +31,16 @@ fun CategoryList(
                     )
                 }
             }
-        }else {
-            CategoryButton(
-                text = stringResource(R.string.all_text),
-                onAction = { onCategory(-1) },
-            )
-        }
+        }else
+            loading()
     }
 }
-
-@Preview
-@Composable
-private fun CategoryListPreview() {
-    CategoryList(
-        onCategory = {},
-        listOf<CategoryUi>(CategoryUi(0, "some", ), CategoryUi(1, "some2", ))
-    )
-}
+//
+//@Preview
+//@Composable
+//private fun CategoryListPreview() {
+//    CategoryList(
+//        onCategory = {},
+//        listOf<CategoryUi>(CategoryUi(0, "some", ), CategoryUi(1, "some2", ))
+//    )
+//}

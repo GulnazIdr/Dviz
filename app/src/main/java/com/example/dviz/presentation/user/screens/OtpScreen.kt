@@ -42,7 +42,7 @@ fun OTPScreen(
     var isError by remember { mutableStateOf(false) }
     val snackBarHostState = remember { SnackbarHostState() }
 
-    val authUiResultState = resetPasswordViewModel.authUiResultState.collectAsState().value
+    val authUiResultState = resetPasswordViewModel.uiResultState.collectAsState().value
     val sentOtpResult = resetPasswordViewModel.sentOtpResult.collectAsState().value
 
     BackHandler { onBack() }

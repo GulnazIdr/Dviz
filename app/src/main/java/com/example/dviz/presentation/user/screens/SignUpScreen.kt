@@ -1,6 +1,5 @@
 package com.example.dviz.presentation.user.screens
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -45,7 +44,7 @@ fun SignUpScreen(
     var password by rememberSaveable { mutableStateOf("") }
     var phone by rememberSaveable { mutableStateOf("+7") }
     var checkedState by remember { mutableStateOf(false) }
-    val authUiResultState by authViewModel.authUiResultState.collectAsState()
+    val authUiResultState by authViewModel.uiResultState.collectAsState()
     val context = LocalContext.current
 
     val pdfUrl = "https://drive.google.com/uc?export=download&id=1UD2e1VZKOHcXqrHlH65PBhPAXIftbg07"

@@ -8,6 +8,7 @@ data class CalendarUi(
 ) {
     data class Date(
         val dayOfMonth: String,
+        val isdayOfCurrentMonth: Boolean,
         val isSelected: Boolean
     )
 }

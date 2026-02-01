@@ -18,7 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.dviz.presentation.user.viewmodel.AuthViewModel
 import com.example.ui_interface.R
@@ -38,9 +37,9 @@ fun SignInScreen(
     modifier: Modifier = Modifier
 ) {
     var isButtonEnabled by remember { mutableStateOf(false) }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    val authUiResultState by authViewModel.authUiResultState.collectAsState()
+    var email by remember { mutableStateOf("gulnaz.idrisova.05@bk.ru") }
+    var password by remember { mutableStateOf("1234") }
+    val authUiResultState by authViewModel.uiResultState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
     authUiResultState.Display(

@@ -14,13 +14,10 @@ class CalendarDataSource @Inject constructor() {
         return yearMonth.getDayOfMonthStartingFromMonday()
             .map { date ->
                 CalendarUi.Date(
-                    dayOfMonth = if (date.monthValue == yearMonth.monthValue) {
-                        "${date.dayOfMonth}"
-                    } else {
-                        ""
-                    },
-                    isSelected =
-                        date.isEqual(LocalDate.now()) && date.monthValue == yearMonth.monthValue
+                    dayOfMonth = "${date.dayOfMonth}",
+                    isSelected = date.isEqual(LocalDate.now()) &&
+                            date.monthValue == yearMonth.monthValue,
+                    isdayOfCurrentMonth = date.monthValue == yearMonth.monthValue
                 )
             }
     }
@@ -29,10 +26,11 @@ class CalendarDataSource @Inject constructor() {
     fun YearMonth.getDayOfMonthStartingFromMonday(): List<LocalDate> {
         val firstDayOfMonth = LocalDate.of(year, month, 1)
         val firstMondayOfMonth = firstDayOfMonth.with(DayOfWeek.MONDAY)
-        val firstDayOfNextMonth = firstDayOfMonth.plusMonths(1)
+        val lastDayOfCalendar = firstDayOfMonth.plusWeeks(4)
+            .with(DayOfWeek.SUNDAY).plusDays(1)
 
         return generateSequence(firstMondayOfMonth) { it.plusDays(1) }
-            .takeWhile { it.isBefore(firstDayOfNextMonth) }
+            .takeWhile { it.isBefore(lastDayOfCalendar) }
             .toList()
     }
 }

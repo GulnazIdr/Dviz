@@ -40,6 +40,9 @@ object ForgotPassword: Destination{
 object Home: Destination
 
 @Serializable
+class EventDetails(val eventId: Int): Destination
+
+@Serializable
 class Catalog(val catalogId: Int): Destination
 
 @Serializable

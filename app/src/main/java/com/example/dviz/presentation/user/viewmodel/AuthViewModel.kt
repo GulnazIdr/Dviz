@@ -1,31 +1,22 @@
 package com.example.dviz.presentation.user.viewmodel
 
-import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dviz.data.UserSerial
-import com.example.dviz.domain.AuthRepository
-import com.example.dviz.domain.RegistrationUseCase
-import com.example.dviz.domain.User
-import com.example.dviz.domain.ValidationUtil
+import com.example.dviz.domain.user.AuthRepository
+import com.example.dviz.domain.user.RegistrationUseCase
+import com.example.dviz.domain.models.User
+import com.example.dviz.domain.user.ValidationUtil
+import com.example.dviz.presentation.user.UiResultState
 import com.example.dviz.presentation.user.AuthResultMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-import kotlinx.io.IOException
-import kotlinx.serialization.SerializationException
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
@@ -33,10 +24,10 @@ class AuthViewModel @Inject constructor(
     private val mapper: AuthResultMapper,
     private val registerUseCase: RegistrationUseCase
 ) : ViewModel() {
-    private val _authUiResultState = MutableStateFlow<
+    private val _UiResultState = MutableStateFlow<
 
-            AuthUiResultState>(AuthUiResultState.Initial)
-    val authUiResultState: StateFlow<AuthUiResultState> get() = _authUiResultState.asStateFlow()
+            UiResultState>(UiResultState.Initial)
+    val uiResultState: StateFlow<UiResultState> get() = _UiResultState.asStateFlow()
 
     var nameErrorHint by mutableStateOf("")
     var emailErrorHint by  mutableStateOf("")
@@ -60,7 +51,7 @@ class AuthViewModel @Inject constructor(
             passwordErrorHint = res.passwordError
             policyErrorHint = res.policyError
 
-            if (res.result != null) _authUiResultState.value = res.result.map(mapper)
+            if (res.result != null) _UiResultState.value = res.result.map(mapper)
         }
     }
 
@@ -68,23 +59,23 @@ class AuthViewModel @Inject constructor(
         email: String?,
         password: String?
     ) = viewModelScope.launch {
-            _authUiResultState.value = AuthUiResultState.Loading("Проверка..")
+            _UiResultState.value = UiResultState.Loading("Проверка..")
             val result = authRepository.signIn(
                 User(
                     email = email.toString(),
                     password = password.toString()
                 )
             )
-            _authUiResultState.value = result.map(mapper)
+            _UiResultState.value = result.map(mapper)
     }
 
     fun updateUserPassword(newPassword: String){
         val passwordError = ValidationUtil.validatePassword(newPassword)
         if(passwordError.isEmpty()){
-            _authUiResultState.value = AuthUiResultState.Loading("Saving..")
+            _UiResultState.value = UiResultState.Loading("Saving..")
             viewModelScope.launch {
                 val res = authRepository.updatePassword(newPassword)
-                _authUiResultState.value = res.map(mapper)
+                _UiResultState.value = res.map(mapper)
             }
         }else passwordErrorHint = passwordError
     }

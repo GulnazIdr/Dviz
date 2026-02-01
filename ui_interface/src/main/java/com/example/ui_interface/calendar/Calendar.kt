@@ -47,7 +47,7 @@ fun Calendar(
 
             CalendarDays(
                 dates = dates,
-                onDateClickListener = onDateClickListener
+                onDateClickListener = {onDateClickListener(it)}
             )
         }
     }
@@ -61,99 +61,7 @@ private fun CalendarPrev() {
         YearMonth.now(),
         onPreviousMonthButtonClicked = {},
         onNextMonthButtonClicked = {},
-        dates = listOf(
-            CalendarUi.Date(
-                "1", false
-            ),
-            CalendarUi.Date(
-                "2", false
-            ),
-            CalendarUi.Date(
-                "3", true
-            ),
-            CalendarUi.Date(
-                "4", false
-            ),
-            CalendarUi.Date(
-                "5", false
-            ),
-            CalendarUi.Date(
-                "1", false
-            ),
-            CalendarUi.Date(
-                "2", false
-            ),
-            CalendarUi.Date(
-                "3", false
-            ),
-            CalendarUi.Date(
-                "4", false
-            ),
-            CalendarUi.Date(
-                "5", false
-            ),
-            CalendarUi.Date(
-                "1", false
-            ),
-            CalendarUi.Date(
-                "2", false
-            ),
-            CalendarUi.Date(
-                "3", false
-            ),
-            CalendarUi.Date(
-                "4", false
-            ),
-            CalendarUi.Date(
-                "5", false
-            ),
-            CalendarUi.Date(
-                "1", false
-            ),
-            CalendarUi.Date(
-                "2", false
-            ),
-            CalendarUi.Date(
-                "3", true
-            ),
-            CalendarUi.Date(
-                "4", false
-            ),
-            CalendarUi.Date(
-                "5", false
-            ),
-            CalendarUi.Date(
-                "1", false
-            ),
-            CalendarUi.Date(
-                "2", false
-            ),
-            CalendarUi.Date(
-                "3", false
-            ),
-            CalendarUi.Date(
-                "4", false
-            ),
-            CalendarUi.Date(
-                "5", false
-            ),
-            CalendarUi.Date(
-                "1", false
-            ),
-            CalendarUi.Date(
-                "2", false
-            ),
-            CalendarUi.Date(
-                "3", false
-            ),
-            CalendarUi.Date(
-                "4", false
-            ),
-            CalendarUi.Date(
-                "5", false
-            ),
-
-        ),
+        dates = listOf(),
         onDateClickListener = {}
     )
 }

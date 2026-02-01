@@ -23,15 +23,15 @@ fun CalendarMoveButton(
 ) {
     Box(
         modifier = Modifier
-            .size(17.3.dp)
+            .size(21.dp)
             .border(1.5.dp, grayLight, RoundedCornerShape(4.dp))
             .clickable(onClick = {onArrow()})
-
     ){
         Icon(
             painter = painterResource(R.drawable.arrow),
             contentDescription = "icon",
             modifier = Modifier
+                .size(15.dp)
                 .rotate(
                     if (isToRight) 180f
                     else 0f

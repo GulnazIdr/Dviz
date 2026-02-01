@@ -9,8 +9,8 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.example.dviz.data.DataStoreRepositoryImpl
-import com.example.dviz.data.UserPreferencesSerializer
-import com.example.dviz.data.UserSerial
+import com.example.dviz.data.user.UserPreferencesSerializer
+import com.example.dviz.data.user.UserSerial
 import com.example.dviz.domain.DataStoreRepository
 import dagger.Module
 import dagger.Provides

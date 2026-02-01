@@ -1,8 +1,8 @@
 package com.example.dviz.di
 
-import com.example.dviz.domain.AuthRepository
-import com.example.dviz.domain.GeneratePasswordUseCase
-import com.example.dviz.domain.RegistrationUseCase
+import com.example.dviz.domain.user.AuthRepository
+import com.example.dviz.domain.user.GeneratePasswordUseCase
+import com.example.dviz.domain.user.RegistrationUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -18,6 +18,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true"
+                )
+            }
+        }
     }
 
     buildTypes {
@@ -52,6 +61,9 @@ android {
 }
 
 dependencies {
+    implementation("io.coil-kt.coil3:coil-compose:3.3.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
+
     implementation(platform("io.github.jan-tennert.supabase:bom:3.3.0"))
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:auth-kt")
@@ -59,6 +71,11 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:storage-kt:3.3.0")
     implementation("io.ktor:ktor-client-cio:3.4.0")
     implementation("io.ktor:ktor-client-core:3.4.0")
+
+    val room_version = "2.8.4"
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     implementation("androidx.datastore:datastore-preferences:1.2.0")
 

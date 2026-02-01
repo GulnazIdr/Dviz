@@ -36,23 +36,12 @@ class CalendarViewModel @Inject constructor(
         }
     }
 
-    fun toNextMonth(nextMonth: YearMonth) {
+    fun toMonth(month: YearMonth) {
         viewModelScope.launch {
             _uiState.update { currentState ->
                 currentState.copy(
-                    yearMonth = nextMonth,
-                    dates = dataSource.getDates(nextMonth)
-                )
-            }
-        }
-    }
-
-    fun toPreviousMonth(prevMonth: YearMonth) {
-        viewModelScope.launch {
-            _uiState.update { currentState ->
-                currentState.copy(
-                    yearMonth = prevMonth,
-                    dates = dataSource.getDates(prevMonth)
+                    yearMonth = month,
+                    dates = dataSource.getDates(month)
                 )
             }
         }

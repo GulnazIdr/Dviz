@@ -13,9 +13,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
-import com.example.dviz.presentation.CatalogScreen
+import com.example.dviz.presentation.events.main.CatalogScreen
 import com.example.dviz.presentation.HomeScreen
-import com.example.dviz.presentation.PlaceScreen
+import com.example.dviz.presentation.events.PlaceScreen
 import com.example.dviz.presentation.SplashScreen
 import com.example.dviz.presentation.search.SearchScreen
 import com.example.dviz.presentation.user.screens.ForgotPasswordScreen
@@ -25,6 +25,7 @@ import com.example.dviz.presentation.user.screens.SignInScreen
 import com.example.dviz.presentation.user.screens.SignUpScreen
 import com.example.dviz.presentation.user.viewmodel.AuthViewModel
 import com.example.dviz.presentation.user.viewmodel.ResetPasswordViewModel
+import com.example.dviz.presentation.events.main.EventDetails
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -147,7 +148,18 @@ fun NavigationGraph(modifier: Modifier = Modifier) {
         composable<Home> {
             HomeScreen(
                 onCategory = {navController.navigate(Catalog(it))},
-                onSearch = {navController.navigate(Search)}
+                onSearch = {navController.navigate(Search)},
+                onCard = {
+                    navController.navigate(EventDetails(it))
+                }
+            )
+        }
+
+        composable<EventDetails> {
+            val args = it.toRoute<EventDetails>().eventId
+            EventDetails(
+                onBack = {navController.popBackStack()},
+                eventId = args
             )
         }
 

@@ -1,6 +1,5 @@
 package com.example.ui_interface.calendar
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ui_interface.models.CalendarUi
 import com.example.ui_interface.theme.LocalTypography
-import com.example.ui_interface.theme.white
 
 @Composable
 fun CalendarDays(
@@ -24,7 +22,7 @@ fun CalendarDays(
     onDateClickListener: (CalendarUi.Date) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val weekList = listOf<String>("пн","вт","ср","чт","пт","сб","вс")
+    val weekList = listOf("пн","вт","ср","чт","пт","сб","вс")
 
     Column(
         modifier = modifier,
@@ -37,7 +35,7 @@ fun CalendarDays(
         ) {
             repeat(7) {
                 Text(
-                    text = weekList[it].toString(),
+                    text = weekList[it],
                     style = LocalTypography.current.titleMedium3.copy(
                         fontSize = 10.sp
                     )
@@ -56,16 +54,14 @@ fun CalendarDays(
             repeat(5) {
                 if (index >= dates.size) return@repeat
                 Row {
-                    repeat(7) {
-                        val item =
-                            if (index < dates.size) dates[index]
-                            else CalendarUi.Date("0", false)
+                    repeat(7) { week ->
+                        val item = dates[index]
                         CalendarItem(
                             date = item,
-                            onClickListener = { onDateClickListener(item) },
+                            onClickListener = { onDateClickListener(it) },
                             modifier = Modifier.weight(1f)
                         )
-                        if (it != 6)
+                        if (week != 6)
                             Spacer(modifier = Modifier.width(5.4.dp))
                         index++
                     }

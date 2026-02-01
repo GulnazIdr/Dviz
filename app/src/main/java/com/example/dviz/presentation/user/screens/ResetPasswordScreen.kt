@@ -62,7 +62,7 @@ fun ResetPasswordScreen(
     val clipboardManager = LocalClipboard.current
 
     val snackbarHostState = remember { SnackbarHostState() }
-    val authUiResultState by authViewModel.authUiResultState.collectAsState()
+    val authUiResultState by authViewModel.uiResultState.collectAsState()
 
     val scope = rememberCoroutineScope()
 
