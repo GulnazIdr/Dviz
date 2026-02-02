@@ -8,6 +8,5 @@ import androidx.room.PrimaryKey
 )
 data class CategoryEntity (
     @PrimaryKey
-    val id: String,
     val category_name: String
 )

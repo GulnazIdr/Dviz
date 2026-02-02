@@ -2,6 +2,8 @@ package com.example.ui_interface.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,7 +13,7 @@ import com.example.ui_interface.models.CategoryUi
 
 @Composable
 fun CategoryList(
-    onCategory: (id: Int) -> Unit,
+    onCategory: (String) -> Unit,
     listOfButtons: List<CategoryUi>,
     isLoading: Boolean = false,
     loading: @Composable () -> Unit,
@@ -27,12 +29,11 @@ fun CategoryList(
                 items(listOfButtons.size) { button ->
                     CategoryButton(
                         text = listOfButtons[button].name,
-                        onAction = { onCategory(button) },
+                        onAction = { onCategory(listOfButtons[button].name) },
                     )
                 }
             }
-        }else
-            loading()
+        }else loading()
     }
 }
 //

@@ -27,7 +27,7 @@ import com.example.dviz.domain.FetchResult
 import com.example.dviz.presentation.CircleLoading
 import com.example.dviz.presentation.events.EventViewModel
 import com.example.ui_interface.components.CommonScaffold
-import com.example.ui_interface.models.EventUi
+import com.example.dviz.presentation.events.EventUi
 import com.example.ui_interface.theme.white
 import com.example.ui_interface.top_bars.TopAppBar
 

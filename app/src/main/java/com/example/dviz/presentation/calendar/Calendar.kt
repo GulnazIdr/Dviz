@@ -1,4 +1,4 @@
-package com.example.ui_interface.calendar
+package com.example.dviz.presentation.calendar
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -6,16 +6,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.dviz.presentation.events.EventDateTime
 import com.example.ui_interface.models.CalendarUi
 import com.example.ui_interface.theme.white
 import java.time.YearMonth
@@ -27,9 +30,10 @@ fun Calendar(
     onPreviousMonthButtonClicked: (YearMonth) -> Unit,
     onNextMonthButtonClicked: (YearMonth) -> Unit,
     dates: List<CalendarUi.Date>,
-    onDateClickListener: (CalendarUi.Date) -> Unit,
+    onDateClickListener: (EventDateTime) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var isChosen by remember { mutableStateOf(false) }
     Box(
         modifier
             .clip(RoundedCornerShape(4.5.dp))
@@ -47,7 +51,11 @@ fun Calendar(
 
             CalendarDays(
                 dates = dates,
-                onDateClickListener = {onDateClickListener(it)}
+                onDateClickListener = {
+                    isChosen = !isChosen
+                    onDateClickListener(EventDateTime(yearMonth, it.dayOfMonth.toInt()))
+                },
+                isChosen = isChosen
             )
         }
     }

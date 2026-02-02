@@ -1,5 +1,6 @@
 package com.example.dviz.domain.models
 
-data class Category(
+data class Location(
+    val id: String,
     val name: String
 )

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.example.dviz.presentation.events.CardEvent
 import com.example.ui_interface.buttons.ChangeAmountSideButton
 import com.example.ui_interface.buttons.DeleteSideButton
-import com.example.ui_interface.models.EventUi
+import com.example.dviz.presentation.events.EventUi
 
 @Composable
 fun CartItemAction(

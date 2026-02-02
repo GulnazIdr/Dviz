@@ -3,8 +3,6 @@ package com.example.dviz.data.room.entities
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.example.ui_interface.models.CategoryUi
-import com.example.ui_interface.models.CityUi
 import java.time.LocalDateTime
 
 @Entity(
@@ -12,8 +10,8 @@ import java.time.LocalDateTime
     foreignKeys =[
         ForeignKey(
             entity = CategoryEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["categoryId"]
+            parentColumns = ["category_name"],
+            childColumns = ["categoryId" ]
         ),
         ForeignKey(
             entity = CityEntity::class,

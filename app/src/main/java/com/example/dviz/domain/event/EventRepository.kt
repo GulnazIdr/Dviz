@@ -2,6 +2,7 @@ package com.example.dviz.domain.event
 
 import com.example.dviz.domain.FetchResult
 import com.example.dviz.domain.models.Category
+import com.example.dviz.domain.models.Location
 import com.example.dviz.domain.models.Movies
 import com.example.dviz.domain.models.Place
 import com.example.dviz.domain.models.Places
@@ -12,4 +13,5 @@ interface EventRepository {
     ): FetchResult<List<Places>>
     suspend fun fetchCategoryList(): FetchResult<List<Category>>
     suspend fun getPlaceById(id: Int): FetchResult<Place>
+    suspend fun getLocations(): FetchResult<List<Location>>
 }

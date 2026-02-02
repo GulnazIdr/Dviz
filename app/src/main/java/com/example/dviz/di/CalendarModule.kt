@@ -1,6 +1,6 @@
 package com.example.dviz.di
 
-import com.example.ui_interface.calendar.CalendarDataSource
+import com.example.dviz.presentation.calendar.CalendarDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

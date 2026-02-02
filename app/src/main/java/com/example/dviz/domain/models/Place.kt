@@ -5,10 +5,10 @@ data class Place(
     val title: String,
     val city: String,
     val images: List<String>,
-    val categories: List<Category>,
+    val category: Category,
     val address: String = "",
     val bodyText: String = "",
-    val site_url: String = "",
+    val price: String,
     val age_restriction: String = ""
 )
 

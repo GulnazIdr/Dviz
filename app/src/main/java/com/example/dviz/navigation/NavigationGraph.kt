@@ -13,10 +13,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
-import com.example.dviz.presentation.events.main.CatalogScreen
 import com.example.dviz.presentation.HomeScreen
-import com.example.dviz.presentation.events.PlaceScreen
 import com.example.dviz.presentation.SplashScreen
+import com.example.dviz.presentation.events.PlaceScreen
+import com.example.dviz.presentation.events.main.CatalogScreen
+import com.example.dviz.presentation.events.main.EventDetails
 import com.example.dviz.presentation.search.SearchScreen
 import com.example.dviz.presentation.user.screens.ForgotPasswordScreen
 import com.example.dviz.presentation.user.screens.OTPScreen
@@ -25,7 +26,6 @@ import com.example.dviz.presentation.user.screens.SignInScreen
 import com.example.dviz.presentation.user.screens.SignUpScreen
 import com.example.dviz.presentation.user.viewmodel.AuthViewModel
 import com.example.dviz.presentation.user.viewmodel.ResetPasswordViewModel
-import com.example.dviz.presentation.events.main.EventDetails
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -54,7 +54,7 @@ fun NavigationGraph(modifier: Modifier = Modifier) {
 
     NavHost(
         navController = navController,
-        startDestination = Splash
+        startDestination = Home
     ) {
         composable<Splash> {
             SplashScreen(
@@ -164,9 +164,9 @@ fun NavigationGraph(modifier: Modifier = Modifier) {
         }
 
         composable<Catalog> {
-            val args = it.toRoute<Catalog>().catalogId
+            val args = it.toRoute<Catalog>().catalogName
             CatalogScreen(
-                categoryId = args,
+                categoryName = args,
                 onCard = {navController.navigate(Place)},
                 onBack = {},
                 navigateToFavorite = {}

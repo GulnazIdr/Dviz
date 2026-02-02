@@ -1,4 +1,4 @@
-package com.example.ui_interface.calendar
+package com.example.dviz.presentation.calendar
 
 import android.os.Build
 import androidx.annotation.RequiresApi

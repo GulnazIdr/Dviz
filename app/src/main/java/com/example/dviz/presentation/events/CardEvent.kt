@@ -11,17 +11,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.SubcomposeAsyncImage
 import com.example.dviz.presentation.CircleLoading
-import com.example.ui_interface.models.EventUi
 import com.example.ui_interface.theme.LocalTypography
+import com.example.ui_interface.theme.black
 import com.example.ui_interface.theme.darkBlack
 import com.example.ui_interface.theme.white
 
@@ -38,6 +41,7 @@ fun CardEvent(
             .background(white)
             .clickable(onClick = { onCard(event.id) })
     ) {
+
         Box(
             modifier = Modifier.weight(2f)
         ) {
@@ -46,14 +50,23 @@ fun CardEvent(
                 contentDescription = "${event.title} image",
                 modifier = Modifier
                     .fillMaxSize()
-                    .align(Alignment.TopStart)
+                    .align(Alignment.Center)
                     .clip(RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp)),
                 loading = {
-                    Box{
+                    Box {
                         CircleLoading()
                     }
                 },
                 error = {
+                    Icon(
+                        painter = painterResource(com.example.ui_interface.R.drawable.ic_increment),
+                        contentDescription = "error image",
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .align(Alignment.Center)
+                            .rotate(90f),
+                        tint = black
+                    )
                     Log.e(
                         "loading sneakers error",
                         "${it.result.throwable.message} " + "${it.result.throwable.cause}"
@@ -64,13 +77,16 @@ fun CardEvent(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Column(modifier = Modifier
-            .weight(1.5f)
-            .width(180.dp)
-            .padding(7.dp)
+        Column(
+            modifier = Modifier
+                .weight(1.5f)
+                .width(180.dp)
+                .padding(7.dp)
         ) {
             Text(
-                text = event.title,
+                text =
+                    if (event.title.length > 50) event.title.take(49) +"..."
+                    else event.title,
                 style = LocalTypography.current.titleMedium3.copy(
                     color = darkBlack
                 )
@@ -78,14 +94,18 @@ fun CardEvent(
 
             Spacer(modifier = Modifier.height(5.dp))
 
-            Text(
-                text = event.price.toString(),
-                style = LocalTypography.current.titleMedium3.copy(
-                    color = darkBlack,
-                    fontSize = 20.sp
-                ),
-            )
+            Box() {
+                Text(
+                    text = event.price,
+                    style = LocalTypography.current.titleMedium3.copy(
+                        color = darkBlack,
+                        fontSize = 20.sp
+                    ),
+                    modifier = Modifier.align(Alignment.BottomStart)
+                )
+            }
         }
+
     }
 }
 

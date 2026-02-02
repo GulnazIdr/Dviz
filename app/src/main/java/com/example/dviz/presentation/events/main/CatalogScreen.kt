@@ -14,11 +14,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.dviz.presentation.events.CardEvent
@@ -26,13 +25,13 @@ import com.example.dviz.presentation.events.EventViewModel
 import com.example.ui_interface.components.CategoryList
 import com.example.ui_interface.components.CommonScaffold
 import com.example.ui_interface.models.CategoryUi
-import com.example.ui_interface.models.EventUi
+import com.example.dviz.presentation.events.EventUi
 import com.example.ui_interface.theme.lighterGray
 import com.example.ui_interface.top_bars.TopAppBar
 
 @Composable
 fun CatalogScreen(
-    categoryId: Int,
+    categoryName: String,
     onCard: (id: Int) ->  Unit,
     onBack: () -> Unit,
     eventViewModel: EventViewModel = hiltViewModel(),
@@ -42,7 +41,7 @@ fun CatalogScreen(
     // TODO: finish here
     val snackbarHostState = remember { SnackbarHostState() }
 
-    var categoryId by remember { mutableIntStateOf(categoryId) }
+    var categoryId by remember { mutableStateOf(categoryName) }
     val categoryList = listOf<CategoryUi>()
     val data = listOf<EventUi>()
 
@@ -50,7 +49,7 @@ fun CatalogScreen(
 
     CommonScaffold(
         snackbarHostState = snackbarHostState
-    ) { padding ->
+    ) { padding -> 
         Box(
             modifier = modifier
                 .background(lighterGray)
@@ -98,13 +97,13 @@ fun CatalogScreen(
 
 }
 
-@Preview
-@Composable
-private fun CatalogScreenPreview() {
-    CatalogScreen(
-        categoryId =  1,
-        onBack = {},
-        onCard = {},
-        navigateToFavorite = {}
-    )
-}
+//@Preview
+//@Composable
+//private fun CatalogScreenPreview() {
+//    CatalogScreen(
+//        categoryId =  1,
+//        onBack = {},
+//        onCard = {},
+//        navigateToFavorite = {}
+//    )
+//}

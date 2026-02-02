@@ -43,7 +43,7 @@ object Home: Destination
 class EventDetails(val eventId: Int): Destination
 
 @Serializable
-class Catalog(val catalogId: Int): Destination
+class Catalog(val catalogName: String): Destination
 
 @Serializable
 object Cart: Destination

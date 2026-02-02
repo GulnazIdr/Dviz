@@ -1,11 +1,10 @@
-package com.example.dviz.data.api.mappers
+package com.example.dviz.data.mappers
 
 import com.example.dviz.data.api.movie.MovieDto
 import com.example.dviz.data.api.places.MoviesDto
 import com.example.dviz.domain.models.Category
 import com.example.dviz.domain.models.Place
 import com.example.dviz.domain.models.Places
-import java.time.LocalDate
 
 fun MovieDto.toPlace(): Place{
     return Place(
@@ -13,7 +12,8 @@ fun MovieDto.toPlace(): Place{
         title = title,
         city = "unknown",
         images = images.map { it.image },
-        categories = listOf(Category("movie", "Фильмы"))
+        category = Category("Фильмы"),
+        price = ""
     )
 }
 

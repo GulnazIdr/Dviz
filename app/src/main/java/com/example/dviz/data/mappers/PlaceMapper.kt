@@ -1,4 +1,4 @@
-package com.example.dviz.data.api.mappers
+package com.example.dviz.data.mappers
 
 import com.example.dviz.data.api.places.CategoryDto
 import com.example.dviz.data.api.places.PlaceDetailsDto
@@ -14,7 +14,10 @@ fun PlaceDto.toPlace(): Place{
         title = title,
         city = location,
         images = images.map { it.image },
-        categories = categories.map { Category(id = "slug", name = it)}
+        category =
+            if (categories.isNotEmpty()) Category(name = categories[0])
+            else Category(name = "Все"),
+        price = ""
     )
 }
 
@@ -24,7 +27,8 @@ fun PlaceDetailsDto.toPlace(): Place{
         title = "",
         city ="",
         images = listOf(),
-        categories = listOf()
+        category = Category(""),
+        price = ""
     )
 }
 
@@ -39,7 +43,6 @@ fun PlacesDto.toPlaces(): Places{
 
 fun CategoryDto.toCategory(): Category{
     return Category(
-        id = slug,
         name = name
     )
 }

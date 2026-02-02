@@ -1,14 +1,13 @@
 package com.example.dviz.data.room
 
-import android.util.Log
+import com.example.dviz.data.mappers.toCategory
+import com.example.dviz.data.mappers.toPlace
 import com.example.dviz.data.room.dao.EventDao
 import com.example.dviz.data.room.dao.UserDao
 import com.example.dviz.domain.DataStoreRepository
 import com.example.dviz.domain.FetchResult
-import com.example.dviz.domain.event.EventRepository
 import com.example.dviz.domain.models.Category
 import com.example.dviz.domain.models.Place
-import com.example.dviz.domain.models.Places
 import javax.inject.Inject
 
 class LocalEventRepository @Inject constructor(
@@ -16,22 +15,25 @@ class LocalEventRepository @Inject constructor(
    // private val localOrderDao: LocalOrderDao,
     private val userDao: UserDao,
     private val datastoreRepository: DataStoreRepository
-): EventRepository {
-    override suspend fun fetchEventList(
-        eventPage: Int,
-        placePage: Int,
-        moviePage: Int
-    ): FetchResult<List<Places>> {
-        TODO("Not yet implemented")
-      //  return FetchResult.Success(eventDao.get)
+) {
+    suspend fun fetchEventList(): FetchResult<List<Place>> {
+        return FetchResult.Success(
+            eventDao
+                .getEventsByUserId(datastoreRepository.getCurrentUserId())
+                .map { it.toPlace() }
+        )
     }
 
-    override suspend fun fetchCategoryList(): FetchResult<List<Category>> {
-        TODO("Not yet implemented")
+    suspend fun fetchCategoryList(): FetchResult<List<Category>> {
+        return FetchResult.Success(
+            eventDao.getCategories().map { it.toCategory() }
+        )
     }
 
-    override suspend fun getPlaceById(id: Int): FetchResult<Place> {
-        TODO("Not yet implemented")
+    suspend fun getPlaceById(id: Int): FetchResult<Place> {
+        return FetchResult.Success(
+            eventDao.getEventById(id).toPlace()
+        )
     }
     //    suspend fun addToCart(sneakerId: Int): FetchResult<Int> {
 //        localSneakerDao.addToCart(

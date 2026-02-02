@@ -1,4 +1,4 @@
-package com.example.ui_interface.calendar
+package com.example.dviz.presentation.calendar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,6 +18,7 @@ import com.example.ui_interface.theme.LocalTypography
 
 @Composable
 fun CalendarDays(
+    isChosen: Boolean,
     dates: List<CalendarUi.Date>,
     onDateClickListener: (CalendarUi.Date) -> Unit,
     modifier: Modifier = Modifier
@@ -51,23 +52,27 @@ fun CalendarDays(
             verticalArrangement = Arrangement.Center
         ) {
             var index = 0
-            repeat(5) {
+            repeat(5) { weekIndex ->
                 if (index >= dates.size) return@repeat
                 Row {
-                    repeat(7) { week ->
+                    repeat(7) { dayIndex ->
                         val item = dates[index]
                         CalendarItem(
                             date = item,
                             onClickListener = { onDateClickListener(it) },
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f),
+                            isChosen = isChosen
                         )
-                        if (week != 6)
+                        if (dayIndex != 6)
                             Spacer(modifier = Modifier.width(5.4.dp))
-                        index++
+
+                        index ++
                     }
                 }
-                if (it != 4)
+
+                if (index != 4)
                     Spacer(modifier = Modifier.height(5.4.dp))
+
             }
         }
     }

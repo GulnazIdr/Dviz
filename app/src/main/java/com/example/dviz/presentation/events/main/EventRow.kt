@@ -2,12 +2,16 @@ package com.example.dviz.presentation.events.main
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.dviz.presentation.CircleLoading
 import com.example.dviz.presentation.events.CardEvent
-import com.example.ui_interface.models.EventUi
+import com.example.dviz.presentation.events.EventUi
 
 @Composable
 fun EventRow(
@@ -18,19 +22,25 @@ fun EventRow(
     modifier: Modifier = Modifier
 ) {
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         items(eventUiList.size) { it ->
-            if (
-                it >= eventUiList.size- 1 &&
-                !isPageEnded
-            ) {
-                loadMore()
-            }
             CardEvent(
                 event = eventUiList[it],
                 onCard = { onCard(it) }
             )
+
+            if (
+                it >= eventUiList.size - 1 &&
+                !isPageEnded
+            ) {
+                Spacer(modifier = Modifier.width(30.dp))
+                CircleLoading( )
+                loadMore()
+            }
+
         }
+
     }
 }

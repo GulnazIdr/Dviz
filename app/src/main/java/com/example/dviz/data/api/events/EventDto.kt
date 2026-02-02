@@ -10,7 +10,8 @@ data class EventDto(
     val body_text: String,
     val age_restriction: String,
     val images: List<ImageDto>,
-    val categories: List<String>
+    val categories: List<String>,
+    val price: String
 )
 
 data class DateDto(

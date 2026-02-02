@@ -23,6 +23,9 @@ interface EventDao {
     @Query("SELECT * FROM category_table")
     suspend fun getCategories(): List<CategoryEntity>
 
-    @Query("SELECT * FROM event_table WHERE categoryId = :categoryId")
-    suspend fun getEventsByCategory(categoryId: Int): List<EventEntity>
+    @Query("SELECT * FROM category_table where category_name = :id")
+    suspend fun getCategoryById(id: String): CategoryEntity
+
+    @Query("SELECT * FROM event_table WHERE categoryId = :categoryId and user_id = :uid")
+    suspend fun getEventsByCategoryUid(categoryId: Int, uid: String): List<EventEntity>
 }

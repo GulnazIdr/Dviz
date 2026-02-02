@@ -1,15 +1,16 @@
 package com.example.dviz.data.api
 
 import android.util.Log
-import com.example.dviz.data.api.mappers.toCategory
-import com.example.dviz.data.api.mappers.toPlace
-import com.example.dviz.data.api.mappers.toPlaces
+import com.example.dviz.data.mappers.toCategory
+import com.example.dviz.data.mappers.toPlace
+import com.example.dviz.data.mappers.toPlaces
 import com.example.dviz.data.api.places.CategoryDto
+import com.example.dviz.data.mappers.toLocation
 import com.example.dviz.data.room.LocalEventRepository
-import com.example.dviz.data.room.dao.EventDao
 import com.example.dviz.domain.FetchResult
 import com.example.dviz.domain.event.EventRepository
 import com.example.dviz.domain.models.Category
+import com.example.dviz.domain.models.Location
 import com.example.dviz.domain.models.Place
 import com.example.dviz.domain.models.Places
 import javax.inject.Inject
@@ -21,8 +22,8 @@ class RemoteEventRepoImpl @Inject constructor(
 
     override suspend fun fetchCategoryList(): FetchResult<List<Category>> {
         try {
-            val fetched = mutableListOf(CategoryDto("common","Общее"),
-                CategoryDto("movie","Фильмы"))
+            val fetched = mutableListOf(CategoryDto("Все"),
+                CategoryDto("Фильмы"))
             fetched += eventApi.fetchCategories()
             return FetchResult.Success(fetched.map { it.toCategory() })
         }catch (e: Exception){
@@ -45,19 +46,22 @@ class RemoteEventRepoImpl @Inject constructor(
     override suspend fun fetchEventList(eventPage: Int, placePage: Int, moviePage: Int)
     : FetchResult<List<Places>> {
         try {
-            val movieFetched = eventApi.fetchMovieList(moviePage)
-              .toPlaces()
-            Log.d("something1", "")
-            val placeFetched = eventApi.fetchPlaceList(placePage)
-                .toPlaces()
-            Log.d("something2", "")
-            val eventFetched =  eventApi.fetchEventList(eventPage)
-                .toPlaces()
-            Log.d("something3", "")
-
+            val placeFetched = eventApi.fetchPlaceList(placePage).toPlaces()
+            val eventFetched =  eventApi.fetchEventList(eventPage).toPlaces()
+            val movieFetched = eventApi.fetchMovieList(moviePage).toPlaces()
             return FetchResult.Success(listOf(eventFetched, placeFetched, movieFetched))
         }catch (e: Exception){
             Log.e("fetching places error", "${e::class.simpleName} ${e::message}")
+            return FetchResult.Error(e::message.name)
+        }
+    }
+
+    override suspend fun getLocations(): FetchResult<List<Location>> {
+        try {
+            val fetched = eventApi.fetchCityList()
+            return FetchResult.Success(fetched.map { it.toLocation() })
+        }catch (e: Exception){
+            Log.e("fetching cities error", "${e::class.simpleName} ${e::message}")
             return FetchResult.Error(e::message.name)
         }
     }
